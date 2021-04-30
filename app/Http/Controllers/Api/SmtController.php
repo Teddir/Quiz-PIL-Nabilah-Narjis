@@ -10,12 +10,12 @@ class SmtController extends Controller
 {
     public function index()
     {
-        $semesters = semester::get();
+        $semester = semester::get();
 
         return response()->json([
             'success' => true,
             'message' => 'Daftar data Semester',
-            'data' => $semesters
+            'data' => $semester
         ], 200);
     }
 
