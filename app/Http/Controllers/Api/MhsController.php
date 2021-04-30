@@ -4,41 +4,38 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use App\Models\kontrakmk;
+use App\Models\mahasiswa;
 
-class KtmController extends Controller
+class MhsController extends Controller
 {
     public function index()
     {
-        $kontrakmks = kontrakmk::get();
+        $mahasiswas = mahasiswa::get();
 
         return response()->json([
             'success' => true,
-            'message' => 'Kontrak ',
-            'data' => $kontrakmks
+            'message' => 'Data Mahasiswa',
+            'data' => $mahasiswas
         ], 200);
     }
 
     public function store(Request $request)
     {
-        $request->validate([
-            'mahasiswa_id' => 'required',
-            'semester_id' => 'required|numeric',
-        ]);
+        $request->validate([]);
 
-        $kontrakmks = kontrakmk::create($request->all());
+        $mahasiswas = mahasiswa::create($request->all());
 
-        if ($kontrakmks) {
+        if ($mahasiswas) {
             return response()->json([
                 'success' => true,
-                'message' => 'Kontrak berhasil ditambahkan',
-                'data' => $kontrakmks
+                'message' => 'Mahasiswa berhasil ditambahkan',
+                'data' => $mahasiswas
             ], 200);
         } else {
             return response()->json([
                 'success' => false,
-                'message' => 'Kontrak gagal ditambahkan',
-                'data' => $kontrakmks
+                'message' => 'Mahasiswa gagal ditambahkan',
+                'data' => $mahasiswas
             ], 409);
         }
     }
@@ -46,11 +43,11 @@ class KtmController extends Controller
     public function show(int $id)
     {
 
-        $kontrakmks = kontrakmk::findOrFail($id);
+        $mahasiswas = mahasiswa::findOrFail($id);
         return response()->json([
             'success' => true,
-            'message' => 'Detail Data Kontrak',
-            'data'    => $kontrakmks
+            'message' => 'Data Mahasiswa',
+            'data'    => $mahasiswas
         ], 200);
     }
 
@@ -58,7 +55,7 @@ class KtmController extends Controller
     {
         $request->validate([]);
 
-        $kontrakmk = kontrakmk::find($id);
+        $kontrakmk = mahasiswa::find($id);
 
         $dataRequest  = $request->all();
         $dataResult  = array_filter($dataRequest);
@@ -66,17 +63,17 @@ class KtmController extends Controller
 
         return response()->json([
             'success' => true,
-            'message' => 'kontrak Berhasil di Updated',
+            'message' => 'Mahasiswa Berhasil Updated',
             'data' => $kontrakmk
         ], 200);
     }
 
     public function destroy($id)
     {
-        $cek = kontrakmk::find($id)->delete();
+        $cek = mahasiswa::find($id)->delete();
         return response()->json([
             'success' => true,
-            'message' => 'kontrak Berhasil di Hapus',
+            'message' => 'Mahasiswa Berhasil Dihapus',
             'data'    => $cek
         ], 200);
     }
